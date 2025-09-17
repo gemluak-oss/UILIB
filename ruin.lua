@@ -1,5 +1,5 @@
--- ui_framework.lua
--- Rainbow Theme + Hide/Unhide + Auto Layout Tab
+-- ruin.lua (patched)
+-- Rainbow Theme + Hide/Unhide + Tab auto layout
 
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
@@ -12,7 +12,6 @@ UI.__index = UI
 local registeredThemedElements = {}
 local rainbow = { enabled = true, speed = 0.2, hue = 0 }
 
--- theme utils
 local function safeSet(inst, prop, value)
     if inst and inst:IsA("Instance") and inst[prop] ~= nil then
         pcall(function() inst[prop] = value end)
@@ -174,10 +173,11 @@ function UI:CreateWindow(opts)
     function self:CreateTab(title)
         local tab = { Title = title }
         local secFrame = Instance.new("Frame")
-        secFrame.Size = UDim2.new(1, 0, 1, -22) -- penuh area konten
+        secFrame.Size = UDim2.new(1, 0, 1, -22) -- tinggi penuh
         secFrame.BackgroundTransparency = 1
         secFrame.Parent = content
 
+        -- auto layout
         local list = Instance.new("UIListLayout")
         list.Padding = UDim.new(0, 6)
         list.FillDirection = Enum.FillDirection.Vertical
@@ -257,7 +257,7 @@ function UI:CreateWindow(opts)
     return self
 end
 
--- Simple notification
+-- simple notify
 function UI.Notify(opts)
     local sg = newScreenGui("NotifGui")
     local f = Instance.new("Frame")
