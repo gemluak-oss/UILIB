@@ -5,6 +5,7 @@ local LocalPlayer = Players.LocalPlayer
 local Framework = {}
 Framework.__index = Framework
 
+-- fungsi draggable
 local function MakeDraggable(topbar, frame)
     local dragging, dragInput, dragStart, startPos
     topbar.InputBegan:Connect(function(input)
@@ -37,6 +38,7 @@ function Framework:CreateWindow(title)
     local gui = Instance.new("ScreenGui")
     gui.Parent = LocalPlayer:WaitForChild("PlayerGui")
     gui.ResetOnSpawn = false
+    gui.Name = "SidebarUI"
 
     local main = Instance.new("Frame")
     main.Size = UDim2.new(0, 600, 0, 350)
