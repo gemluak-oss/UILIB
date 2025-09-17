@@ -1,19 +1,14 @@
--- vape_ui.lua (mod tanpa colorpicker / rainbow)
-
+-- vape_ui.lua (mod: tanpa colorpicker, draggable aktif)
 local lib = {}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
-local LocalPlayer = game:GetService("Players").LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
-local PresetColor = Color3.fromRGB(44, 120, 224)
-local CloseBind = Enum.KeyCode.RightControl
 
 local ui = Instance.new("ScreenGui")
 ui.Name = "ui"
 ui.Parent = game.CoreGui
 ui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
--- draggable helper
+-- helper draggable
 local function MakeDraggable(topbarobject, object)
     local Dragging, DragInput, DragStart, StartPosition
     local function Update(input)
@@ -39,88 +34,65 @@ local function MakeDraggable(topbarobject, object)
     end)
 end
 
-function lib:Window(text, preset, closebind)
-    CloseBind = closebind or Enum.KeyCode.RightControl
-    PresetColor = preset or PresetColor
+function lib:Window(title)
     local Main = Instance.new("Frame")
-    local TabHold = Instance.new("Frame")
-    local TabHoldLayout = Instance.new("UIListLayout")
-    local Title = Instance.new("TextLabel")
-    local TabFolder = Instance.new("Folder")
-    local DragFrame = Instance.new("Frame")
-
     Main.Name = "Main"
     Main.Parent = ui
     Main.AnchorPoint = Vector2.new(0.5, 0.5)
     Main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-    Main.Size = UDim2.new(0, 0, 0, 0)
-    Main.ClipsDescendants = true
+    Main.Size = UDim2.new(0, 560, 0, 319)
 
-    TabHold.Parent = Main
-    TabHold.BackgroundTransparency = 1
-    TabHold.Position = UDim2.new(0.03, 0, 0.15, 0)
-    TabHold.Size = UDim2.new(0, 107, 0, 254)
-    TabHoldLayout.Parent = TabHold
-    TabHoldLayout.Padding = UDim.new(0, 11)
+    -- drag area
+    local DragFrame = Instance.new("Frame")
+    DragFrame.Parent = Main
+    DragFrame.BackgroundTransparency = 1
+    DragFrame.Size = UDim2.new(1, 0, 0, 40)
+    MakeDraggable(DragFrame, Main)
 
+    -- title
+    local Title = Instance.new("TextLabel")
     Title.Parent = Main
     Title.BackgroundTransparency = 1
     Title.Position = UDim2.new(0.03, 0, 0.05, 0)
     Title.Size = UDim2.new(0, 200, 0, 23)
     Title.Font = Enum.Font.GothamSemibold
-    Title.Text = text
-    Title.TextColor3 = Color3.fromRGB(255,255,255)
+    Title.Text = title
+    Title.TextColor3 = Color3.new(1, 1, 1)
     Title.TextSize = 14
     Title.TextXAlignment = Enum.TextXAlignment.Left
 
-    DragFrame.Parent = Main
-    DragFrame.BackgroundTransparency = 1
-    DragFrame.Size = UDim2.new(0, 560, 0, 41)
-    Main:TweenSize(UDim2.new(0, 560, 0, 319), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
-    MakeDraggable(DragFrame, Main)
+    -- tab holder
+    local TabHold = Instance.new("Frame")
+    TabHold.Parent = Main
+    TabHold.BackgroundTransparency = 1
+    TabHold.Position = UDim2.new(0.03, 0, 0.15, 0)
+    TabHold.Size = UDim2.new(0, 107, 0, 254)
 
-    -- hide/unhide dengan RightControl
-    local hidden = false
-    UserInputService.InputBegan:Connect(function(io,gp)
-        if io.KeyCode == CloseBind then
-            if not hidden then
-                Main:TweenSize(UDim2.new(0,0,0,0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .5,true,function()
-                    ui.Enabled = false
-                end)
-            else
-                ui.Enabled = true
-                Main:TweenSize(UDim2.new(0,560,0,319), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .5,true)
-            end
-            hidden = not hidden
-        end
-    end)
+    local TabLayout = Instance.new("UIListLayout", TabHold)
+    TabLayout.Padding = UDim.new(0, 8)
 
-    TabFolder.Parent = Main
+    local TabFolder = Instance.new("Folder", Main)
 
     local tabhold = {}
     function tabhold:Tab(name)
         local TabBtn = Instance.new("TextButton")
-        local TabTitle = Instance.new("TextLabel")
-        local Indicator = Instance.new("Frame")
-
         TabBtn.Parent = TabHold
         TabBtn.Size = UDim2.new(0, 107, 0, 21)
         TabBtn.BackgroundTransparency = 1
-        TabTitle.Parent = TabBtn
-        TabTitle.Size = UDim2.new(0,107,0,21)
+        TabBtn.Text = ""
+        local TabTitle = Instance.new("TextLabel", TabBtn)
+        TabTitle.Size = UDim2.new(1, 0, 1, 0)
+        TabTitle.BackgroundTransparency = 1
         TabTitle.Font = Enum.Font.Gotham
         TabTitle.Text = name
         TabTitle.TextColor3 = Color3.fromRGB(200,200,200)
-        Indicator.Parent = TabBtn
-        Indicator.BackgroundColor3 = PresetColor
-        Indicator.BorderSizePixel = 0
-        Indicator.Position = UDim2.new(0,0,1,0)
-        Indicator.Size = UDim2.new(0,0,0,2)
+        TabTitle.TextSize = 14
+        TabTitle.TextXAlignment = Enum.TextXAlignment.Left
 
         local Tab = Instance.new("ScrollingFrame")
         Tab.Parent = TabFolder
-        Tab.Size = UDim2.new(0,373,0,254)
+        Tab.Size = UDim2.new(0, 373, 0, 254)
         Tab.Position = UDim2.new(0.31,0,0.15,0)
         Tab.BackgroundTransparency = 1
         Tab.ScrollBarThickness = 3
@@ -128,20 +100,31 @@ function lib:Window(text, preset, closebind)
         local layout = Instance.new("UIListLayout", Tab)
         layout.Padding = UDim.new(0,6)
 
-        if TabFolder:FindFirstChild("Tab") == nil then
+        if #TabFolder:GetChildren() == 1 then
             Tab.Visible = true
-            Indicator.Size = UDim2.new(0,13,0,2)
             TabTitle.TextColor3 = Color3.new(1,1,1)
         end
 
         TabBtn.MouseButton1Click:Connect(function()
-            for _,c in ipairs(TabFolder:GetChildren()) do if c:IsA("ScrollingFrame") then c.Visible=false end end
-            Tab.Visible=true
+            for _,c in ipairs(TabFolder:GetChildren()) do
+                if c:IsA("ScrollingFrame") then c.Visible=false end
+            end
+            Tab.Visible = true
         end)
 
         local content = {}
-        function content:Button(text,cb)
-            local b = Instance.new("TextButton",Tab)
+        function content:Label(text)
+            local lbl = Instance.new("TextLabel", Tab)
+            lbl.Size = UDim2.new(0, 363, 0, 30)
+            lbl.BackgroundTransparency = 1
+            lbl.Text = text
+            lbl.TextColor3 = Color3.new(1,1,1)
+            lbl.Font = Enum.Font.Gotham
+            lbl.TextSize = 14
+            lbl.TextXAlignment = Enum.TextXAlignment.Left
+        end
+        function content:Button(text, cb)
+            local b = Instance.new("TextButton", Tab)
             b.Size = UDim2.new(0,363,0,42)
             b.BackgroundColor3=Color3.fromRGB(34,34,34)
             b.Text=""
@@ -152,7 +135,7 @@ function lib:Window(text, preset, closebind)
             t.TextColor3=Color3.new(1,1,1)
             t.Font=Enum.Font.Gotham
             t.TextSize=14
-            b.MouseButton1Click:Connect(function() pcall(cb) end)
+            b.MouseButton1Click:Connect(function() if cb then cb() end end)
         end
         function content:Toggle(text,default,cb)
             local on=default or false
@@ -176,18 +159,8 @@ function lib:Window(text, preset, closebind)
             b.MouseButton1Click:Connect(function()
                 on=not on
                 state.Text=(on and "ON" or "OFF")
-                if cb then pcall(cb,on) end
+                if cb then cb(on) end
             end)
-        end
-        function content:Label(text)
-            local l=Instance.new("TextLabel",Tab)
-            l.Size=UDim2.new(0,363,0,30)
-            l.BackgroundTransparency=1
-            l.Text=text
-            l.TextColor3=Color3.new(1,1,1)
-            l.Font=Enum.Font.Gotham
-            l.TextSize=14
-            l.TextXAlignment=Enum.TextXAlignment.Left
         end
         function content:Textbox(text,cb)
             local f=Instance.new("Frame",Tab)
@@ -210,7 +183,7 @@ function lib:Window(text, preset, closebind)
             box.Font=Enum.Font.Gotham
             box.TextSize=14
             box.FocusLost:Connect(function()
-                if cb then pcall(cb,box.Text) end
+                if cb then cb(box.Text) end
             end)
         end
         return content
