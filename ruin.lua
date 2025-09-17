@@ -1,6 +1,5 @@
 -- ui_framework.lua
--- Minimal UI Framework dengan Rainbow Theme + Hide/Unhide
--- Raditya Nugroho Saputro
+-- Rainbow Theme + Hide/Unhide + Auto Layout Tab
 
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
@@ -10,17 +9,15 @@ local LocalPlayer = Players.LocalPlayer
 local UI = {}
 UI.__index = UI
 
--- internal state
-local windows = {}
 local registeredThemedElements = {}
 local rainbow = { enabled = true, speed = 0.2, hue = 0 }
 
+-- theme utils
 local function safeSet(inst, prop, value)
     if inst and inst:IsA("Instance") and inst[prop] ~= nil then
         pcall(function() inst[prop] = value end)
     end
 end
-
 local function applyTheme(color3)
     for inst, info in pairs(registeredThemedElements) do
         if inst and inst.Parent then
@@ -28,8 +25,12 @@ local function applyTheme(color3)
         end
     end
 end
+function UI._registerThemedElement(inst, prop)
+    if not inst then return end
+    registeredThemedElements[inst] = { prop = prop or "BackgroundColor3" }
+end
 
--- Rainbow loop
+-- rainbow loop
 task.spawn(function()
     while true do
         if rainbow.enabled then
@@ -43,11 +44,7 @@ task.spawn(function()
     end
 end)
 
-function UI._registerThemedElement(inst, prop)
-    if not inst then return end
-    registeredThemedElements[inst] = { prop = prop or "BackgroundColor3" }
-end
-
+-- helpers
 local function newScreenGui(name)
     local sg = Instance.new("ScreenGui")
     sg.Name = name or ("UIFramework_" .. tostring(math.random(1000)))
@@ -55,7 +52,6 @@ local function newScreenGui(name)
     sg.Parent = LocalPlayer:WaitForChild("PlayerGui")
     return sg
 end
-
 local function makeFrame(parent, size, pos)
     local f = Instance.new("Frame")
     f.Size = size or UDim2.new(0, 420, 0, 360)
@@ -66,7 +62,6 @@ local function makeFrame(parent, size, pos)
     UI._registerThemedElement(f, "BackgroundColor3")
     return f
 end
-
 local function makeLabel(parent, text, sizeY)
     local lbl = Instance.new("TextLabel")
     lbl.Size = UDim2.new(1, -12, 0, sizeY or 20)
@@ -114,12 +109,7 @@ function UI:CreateWindow(opts)
     content.BackgroundTransparency = 1
     content.Parent = root
 
-    local leftCol = Instance.new("Frame")
-    leftCol.Size = UDim2.new(1, 0, 1, 0)
-    leftCol.BackgroundTransparency = 1
-    leftCol.Parent = content
-
-    -- Hide Button
+    -- Hide/Unhide
     local hideBtn = Instance.new("TextButton")
     hideBtn.Size = UDim2.new(0, 22, 0, 22)
     hideBtn.Position = UDim2.new(1, -26, 0, 6)
@@ -130,7 +120,6 @@ function UI:CreateWindow(opts)
     hideBtn.Parent = header
     UI._registerThemedElement(hideBtn, "BackgroundColor3")
 
-    -- Unhide Button
     local unhideBtn = Instance.new("TextButton")
     unhideBtn.Size = UDim2.new(0, 40, 0, 24)
     unhideBtn.Position = UDim2.new(0, 8, 0, 8)
@@ -153,7 +142,7 @@ function UI:CreateWindow(opts)
         unhideBtn.Visible = false
     end)
 
-    -- simple drag
+    -- drag
     do
         local dragging, dragStart, startPos
         header.InputBegan:Connect(function(input)
@@ -185,9 +174,16 @@ function UI:CreateWindow(opts)
     function self:CreateTab(title)
         local tab = { Title = title }
         local secFrame = Instance.new("Frame")
-        secFrame.Size = UDim2.new(1, 0, 0, 0)
+        secFrame.Size = UDim2.new(1, 0, 1, -22) -- penuh area konten
         secFrame.BackgroundTransparency = 1
-        secFrame.Parent = leftCol
+        secFrame.Parent = content
+
+        local list = Instance.new("UIListLayout")
+        list.Padding = UDim.new(0, 6)
+        list.FillDirection = Enum.FillDirection.Vertical
+        list.HorizontalAlignment = Enum.HorizontalAlignment.Left
+        list.SortOrder = Enum.SortOrder.LayoutOrder
+        list.Parent = secFrame
 
         local titleLbl = makeLabel(secFrame, title, 22)
         titleLbl.Font = Enum.Font.GothamBold
