@@ -1,6 +1,7 @@
--- Sidebar UI Framework
+-- Sidebar UI Framework dengan Hide/Show + Drag + Animasi
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
 
 local Framework = {}
 Framework.__index = Framework
@@ -41,19 +42,22 @@ function Framework:CreateWindow(title)
     gui.Name = "SidebarUI"
 
     local main = Instance.new("Frame")
-    main.Size = UDim2.new(0, 600, 0, 350)
-    main.Position = UDim2.new(0.5, -300, 0.5, -175)
+    main.Size = UDim2.new(0, 650, 0, 380)
+    main.Position = UDim2.new(0.5, -325, 0.5, -190)
     main.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    main.BorderSizePixel = 0
     main.Parent = gui
 
+    -- topbar
     local topbar = Instance.new("Frame")
     topbar.Size = UDim2.new(1, 0, 0, 30)
     topbar.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    topbar.BorderSizePixel = 0
     topbar.Parent = main
 
     local titleLbl = Instance.new("TextLabel")
-    titleLbl.Size = UDim2.new(1, -10, 1, 0)
-    titleLbl.Position = UDim2.new(0, 5, 0, 0)
+    titleLbl.Size = UDim2.new(1, -50, 1, 0)
+    titleLbl.Position = UDim2.new(0, 10, 0, 0)
     titleLbl.Text = title or "Framework"
     titleLbl.BackgroundTransparency = 1
     titleLbl.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -63,17 +67,23 @@ function Framework:CreateWindow(title)
 
     MakeDraggable(topbar, main)
 
+    -- tombol hide
+    local hideBtn = Instance.new("TextButton")
+    hideBtn.Size = UDim2.new(0, 40, 1, 0)
+    hideBtn.Position = UDim2.new(1, -40, 0, 0)
+    hideBtn.Text = "☰"
+    hideBtn.Font = Enum.Font.GothamBold
+    hideBtn.TextSize = 18
+    hideBtn.TextColor3 = Color3.fromRGB(255,255,255)
+    hideBtn.BackgroundTransparency = 1
+    hideBtn.Parent = topbar
+
+    -- sidebar
     local sidebar = Instance.new("Frame")
-    sidebar.Size = UDim2.new(0, 160, 1, -30)
+    sidebar.Size = UDim2.new(0, 180, 1, -30)
     sidebar.Position = UDim2.new(0, 0, 0, 30)
     sidebar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     sidebar.Parent = main
-
-    local content = Instance.new("Frame")
-    content.Size = UDim2.new(1, -160, 1, -30)
-    content.Position = UDim2.new(0, 160, 0, 30)
-    content.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-    content.Parent = main
 
     local tabHolder = Instance.new("Frame")
     tabHolder.Size = UDim2.new(1, 0, 1, 0)
@@ -82,8 +92,29 @@ function Framework:CreateWindow(title)
 
     local tabLayout = Instance.new("UIListLayout")
     tabLayout.Parent = tabHolder
-    tabLayout.Padding = UDim.new(0, 5)
+    tabLayout.Padding = UDim.new(0, 6)
 
+    -- konten kanan
+    local content = Instance.new("Frame")
+    content.Size = UDim2.new(1, -180, 1, -30)
+    content.Position = UDim2.new(0, 180, 0, 30)
+    content.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    content.Parent = main
+
+    -- hide/unhide logic
+    local sidebarVisible = true
+    hideBtn.MouseButton1Click:Connect(function()
+        sidebarVisible = not sidebarVisible
+        if sidebarVisible then
+            TweenService:Create(sidebar, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {Size = UDim2.new(0, 180, 1, -30)}):Play()
+            TweenService:Create(content, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {Position = UDim2.new(0, 180, 0, 30), Size = UDim2.new(1, -180, 1, -30)}):Play()
+        else
+            TweenService:Create(sidebar, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {Size = UDim2.new(0, 0, 1, -30)}):Play()
+            TweenService:Create(content, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {Position = UDim2.new(0, 0, 0, 30), Size = UDim2.new(1, 0, 1, -30)}):Play()
+        end
+    end)
+
+    -- buat object window
     local self = setmetatable({
         Main = main,
         Sidebar = sidebar,
