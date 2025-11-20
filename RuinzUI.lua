@@ -4027,7 +4027,7 @@ Components.TitleBar = (function()
 				Config.SubTitle and New("TextLabel", {
 					RichText = true,
 					Text = Config.SubTitle,
-					TextTransparency = 0.4,
+					TextTransparency = 0.2,
 					FontFace = Font.new(
 						"rbxasset://fonts/families/GothamSSm.json",
 						Enum.FontWeight.Regular,
