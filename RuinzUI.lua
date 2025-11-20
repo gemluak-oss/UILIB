@@ -43,29 +43,43 @@ local Themes = {
 	},
 	Dark = {
 		Name = "Dark",
-        Accent = Color3.fromRGB(255, 160, 100),
+       Accent = Color3.fromRGB(255, 160, 100), -- oranye lembut
+
+        -- Window / Background utama
         AcrylicMain = Color3.fromRGB(38, 38, 38),
-        AcrylicBorder = Color3.fromRGB(120, 90, 70),
+        AcrylicBorder = Color3.fromRGB(120, 90, 70),  -- border window utama
         AcrylicGradient = ColorSequence.new(Color3.fromRGB(38, 38, 38), Color3.fromRGB(48, 42, 38)),
         AcrylicNoise = 0.15,
         TitleBarLine = Color3.fromRGB(140, 100, 70),
-        Tab = Color3.fromRGB(60, 50, 45),
+
+        -- Tab bar
+        Tab = Color3.fromRGB(60, 50, 45),  -- background tab header
+
+        -- Konten / element dalam window
         Element = Color3.fromRGB(55, 50, 45),
-        ElementBorder = Color3.fromRGB(170, 120, 85),
+        ElementBorder = Color3.fromRGB(170, 120, 85), -- border element
         InElementBorder = Color3.fromRGB(190, 140, 100),
         ElementTransparency = 0,
+
+        -- Toggle / Slider
         ToggleSlider = Color3.fromRGB(140, 100, 75),
-        ToggleToggled = Color3.fromRGB(255, 160, 100),
+        ToggleToggled = Color3.fromRGB(255, 160, 100), -- aksen oranye
         SliderRail = Color3.fromRGB(90, 70, 60),
+        InputIndicator = Color3.fromRGB(190, 140, 100),
+        InputIndicatorFocus = Color3.fromRGB(255, 160, 100),
+
+        -- Dropdown
         DropdownFrame = Color3.fromRGB(50, 45, 40),
         DropdownHolder = Color3.fromRGB(45, 40, 35),
         DropdownBorder = Color3.fromRGB(170, 120, 85),
         DropdownOption = Color3.fromRGB(60, 55, 50),
+
+        -- Keybind / Input
         Keybind = Color3.fromRGB(55, 50, 45),
         Input = Color3.fromRGB(55, 50, 45),
         InputFocused = Color3.fromRGB(75, 65, 55),
-        InputIndicator = Color3.fromRGB(190, 140, 100),
-        InputIndicatorFocus = Color3.fromRGB(255, 160, 100),
+
+        -- Dialog / Popup
         Dialog = Color3.fromRGB(45, 40, 35),
         DialogHolder = Color3.fromRGB(40, 35, 30),
         DialogHolderLine = Color3.fromRGB(170, 120, 85),
@@ -74,10 +88,14 @@ local Themes = {
         DialogBorder = Color3.fromRGB(170, 120, 85),
         DialogInput = Color3.fromRGB(55, 50, 45),
         DialogInputLine = Color3.fromRGB(170, 120, 85),
-        Text = Color3.fromRGB(255, 255, 255),  -- putih murni
+
+        -- Teks
+        Text = Color3.fromRGB(255, 255, 255),    -- putih murni
         SubText = Color3.fromRGB(255, 255, 255), -- putih murni
+
+        -- Hover / efek interaksi
         Hover = Color3.fromRGB(75, 65, 55),
-        HoverChange = 0.08
+        HoverChange = 0.03
 	},
 }
 
