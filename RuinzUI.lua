@@ -3306,11 +3306,11 @@ Components.TitleBar = (function()
 					RichText = true,
 					Text = Config.Title,
 					FontFace = Font.new(
-					    "rbxasset://fonts/families/SourceSansPro.json",
-					    Enum.FontWeight.Bold,
+					    "rbxasset://fonts/families/TitilliumWeb.json",
+					    Enum.FontWeight.SemiBold,
 					    Enum.FontStyle.Normal
 					)
-					TextSize = 20,
+					TextSize = 18,
 					TextXAlignment = "Left",
 					TextYAlignment = "Center",
 					Size = UDim2.fromScale(0, 1),
