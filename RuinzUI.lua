@@ -3339,25 +3339,44 @@ Components.TitleBar = (function()
 					},
 				}),
 				Config.SubTitle and New("TextLabel", {
-					RichText = true,
-					Text = Config.SubTitle,
-					TextTransparency = 0.2,
-					FontFace = Font.new(
-						"rbxasset://fonts/families/GothamSSm.json",
-						Enum.FontWeight.Regular,
-						Enum.FontStyle.Normal
-					),
-					TextSize = 16,
-					TextXAlignment = "Left",
-					TextYAlignment = "Center",
-					Size = UDim2.fromScale(0, 1),
-					AutomaticSize = Enum.AutomaticSize.X,
-					BackgroundTransparency = 1,
-					LayoutOrder = Config.Icon and 3 or 2,
-					ThemeTag = {
-						TextColor3 = "Text",
-					},
-				}) or nil,
+    RichText = true,
+    Text = Config.Title,
+    FontFace = Font.new(
+        "rbxasset://fonts/families/GothamSSm.json",
+        Enum.FontWeight.SemiBold,
+        Enum.FontStyle.Normal
+    ),
+    TextSize = 18,
+    TextXAlignment = Enum.TextXAlignment.Center, -- CENTER horizontal
+    TextYAlignment = Enum.TextYAlignment.Center, -- CENTER vertical
+    Size = UDim2.fromScale(1, 1), -- Ambil seluruh frame induk
+    BackgroundTransparency = 1,
+    LayoutOrder = Config.Icon and 2 or 1,
+    ThemeTag = {
+        TextColor3 = "Text",
+    },
+}),
+
+			Config.SubTitle and New("TextLabel", {
+			    RichText = true,
+			    Text = Config.SubTitle,
+			    TextTransparency = 0.2,
+			    FontFace = Font.new(
+			        "rbxasset://fonts/families/GothamSSm.json",
+			        Enum.FontWeight.Regular,
+			        Enum.FontStyle.Normal
+			    ),
+			    TextSize = 16,
+			    TextXAlignment = Enum.TextXAlignment.Center, -- CENTER horizontal
+			    TextYAlignment = Enum.TextYAlignment.Center, -- CENTER vertical
+			    Size = UDim2.fromScale(1, 1), -- Ambil seluruh frame induk
+			    BackgroundTransparency = 1,
+			    LayoutOrder = Config.Icon and 3 or 2,
+			    ThemeTag = {
+			        TextColor3 = "Text",
+			    },
+			}) or nil,
+
 
 			}),
 			New("Frame", {
