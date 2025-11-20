@@ -3318,64 +3318,45 @@ Components.TitleBar = (function()
 						ImageColor3 = "Text",
 					},
 				}) or nil,
-
-local Container = New("Frame", {
-    Size = UDim2.fromScale(1, 1),
-    BackgroundTransparency = 1,
-})
-
--- Layout untuk menumpuk teks vertikal dan center
-local layout = Instance.new("UIListLayout")
-layout.FillDirection = Enum.FillDirection.Vertical
-layout.HorizontalAlignment = Enum.HorizontalAlignment.Center -- Center horizontal
-layout.VerticalAlignment = Enum.VerticalAlignment.Center     -- Center vertical
-layout.SortOrder = Enum.SortOrder.LayoutOrder
-layout.Parent = Container
-
--- Title
-New("TextLabel", {
-    Parent = Container,
-    RichText = true,
-    Text = Config.Title,
-    FontFace = Font.new(
-        "rbxasset://fonts/families/GothamSSm.json",
-        Enum.FontWeight.Regular,
-        Enum.FontStyle.Normal
-    ),
-    TextSize = 12,
-    TextXAlignment = Enum.TextXAlignment.Center, -- Center horizontal
-    TextYAlignment = Enum.TextYAlignment.Center,
-    Size = UDim2.fromScale(0, 0),
-    AutomaticSize = Enum.AutomaticSize.Y,        -- Sesuaikan tinggi
-    BackgroundTransparency = 1,
-    LayoutOrder = 1,
-    ThemeTag = { TextColor3 = "Text" },
-})
-
--- SubTitle
-if Config.SubTitle then
-    New("TextLabel", {
-        Parent = Container,
-        RichText = true,
-        Text = Config.SubTitle,
-        TextTransparency = 0.4,
-        FontFace = Font.new(
-            "rbxasset://fonts/families/GothamSSm.json",
-            Enum.FontWeight.Regular,
-            Enum.FontStyle.Normal
-        ),
-        TextSize = 12,
-        TextXAlignment = Enum.TextXAlignment.Center, -- Center horizontal
-        TextYAlignment = Enum.TextYAlignment.Center,
-        Size = UDim2.fromScale(0, 0),
-        AutomaticSize = Enum.AutomaticSize.Y,
-        BackgroundTransparency = 1,
-        LayoutOrder = 2,
-        ThemeTag = { TextColor3 = "Text" },
-    })
-end
-
-
+					New("TextLabel", {
+					RichText = true,
+					Text = Config.Title,
+					FontFace = Font.new(
+						"rbxasset://fonts/families/GothamSSm.json",
+						Enum.FontWeight.Regular,
+						Enum.FontStyle.Normal
+					),
+					TextSize = 12,
+					TextXAlignment = "Left",
+					TextYAlignment = "Center",
+					Size = UDim2.fromScale(0, 1),
+					AutomaticSize = Enum.AutomaticSize.X,
+					BackgroundTransparency = 1,
+					LayoutOrder = Config.Icon and 2 or 1,
+					ThemeTag = {
+						TextColor3 = "Text",
+					},
+				}),
+				Config.SubTitle and New("TextLabel", {
+					RichText = true,
+					Text = Config.SubTitle,
+					TextTransparency = 0.4,
+					FontFace = Font.new(
+						"rbxasset://fonts/families/GothamSSm.json",
+						Enum.FontWeight.Regular,
+						Enum.FontStyle.Normal
+					),
+					TextSize = 12,
+					TextXAlignment = "Left",
+					TextYAlignment = "Center",
+					Size = UDim2.fromScale(0, 1),
+					AutomaticSize = Enum.AutomaticSize.X,
+					BackgroundTransparency = 1,
+					LayoutOrder = Config.Icon and 3 or 2,
+					ThemeTag = {
+						TextColor3 = "Text",
+					},
+				}) or nil,
 			}),
 			New("Frame", {
 				BackgroundTransparency = 0.5,
