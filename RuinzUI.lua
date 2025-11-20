@@ -77,8 +77,7 @@ local Themes = {
         SubText = Color3.fromRGB(255, 255, 255),
         Hover = Color3.fromRGB(50, 50, 50),
         HoverChange = 0.06
-	}
-
+	},
 }
 
 local Library = {
