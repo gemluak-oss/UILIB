@@ -3319,63 +3319,61 @@ Components.TitleBar = (function()
 					},
 				}) or nil,
 
-				New("TextLabel", {
-					RichText = true,
-					Text = Config.Title,
-					FontFace = Font.new(
-						"rbxasset://fonts/families/GothamSSm.json",
-						Enum.FontWeight.SemiBold,
-						Enum.FontStyle.Normal
-					),
-					TextSize = 18,
-					TextXAlignment = "Left",
-					TextYAlignment = "Center",
-					Size = UDim2.fromScale(0, 1),
-					AutomaticSize = Enum.AutomaticSize.X,
-					BackgroundTransparency = 1,
-					LayoutOrder = Config.Icon and 2 or 1,
-					ThemeTag = {
-						TextColor3 = "Text",
-					},
-				}),
-				Config.SubTitle and New("TextLabel", {
+local Container = New("Frame", {
+    Size = UDim2.fromScale(1, 1),
+    BackgroundTransparency = 1,
+})
+
+-- Layout untuk menumpuk teks vertikal dan center
+local layout = Instance.new("UIListLayout")
+layout.FillDirection = Enum.FillDirection.Vertical
+layout.HorizontalAlignment = Enum.HorizontalAlignment.Center -- Center horizontal
+layout.VerticalAlignment = Enum.VerticalAlignment.Center     -- Center vertical
+layout.SortOrder = Enum.SortOrder.LayoutOrder
+layout.Parent = Container
+
+-- Title
+New("TextLabel", {
+    Parent = Container,
     RichText = true,
     Text = Config.Title,
     FontFace = Font.new(
         "rbxasset://fonts/families/GothamSSm.json",
-        Enum.FontWeight.SemiBold,
+        Enum.FontWeight.Regular,
         Enum.FontStyle.Normal
     ),
-    TextSize = 18,
-    TextXAlignment = Enum.TextXAlignment.Center, -- CENTER horizontal
-    TextYAlignment = Enum.TextYAlignment.Center, -- CENTER vertical
-    Size = UDim2.fromScale(1, 1), -- Ambil seluruh frame induk
+    TextSize = 12,
+    TextXAlignment = Enum.TextXAlignment.Center, -- Center horizontal
+    TextYAlignment = Enum.TextYAlignment.Center,
+    Size = UDim2.fromScale(0, 0),
+    AutomaticSize = Enum.AutomaticSize.Y,        -- Sesuaikan tinggi
     BackgroundTransparency = 1,
-    LayoutOrder = Config.Icon and 2 or 1,
-    ThemeTag = {
-        TextColor3 = "Text",
-    },
-}),
+    LayoutOrder = 1,
+    ThemeTag = { TextColor3 = "Text" },
+})
 
-			Config.SubTitle and New("TextLabel", {
-			    RichText = true,
-			    Text = Config.SubTitle,
-			    TextTransparency = 0.2,
-			    FontFace = Font.new(
-			        "rbxasset://fonts/families/GothamSSm.json",
-			        Enum.FontWeight.Regular,
-			        Enum.FontStyle.Normal
-			    ),
-			    TextSize = 16,
-			    TextXAlignment = Enum.TextXAlignment.Center, -- CENTER horizontal
-			    TextYAlignment = Enum.TextYAlignment.Center, -- CENTER vertical
-			    Size = UDim2.fromScale(1, 1), -- Ambil seluruh frame induk
-			    BackgroundTransparency = 1,
-			    LayoutOrder = Config.Icon and 3 or 2,
-			    ThemeTag = {
-			        TextColor3 = "Text",
-			    },
-			}) or nil,
+-- SubTitle
+if Config.SubTitle then
+    New("TextLabel", {
+        Parent = Container,
+        RichText = true,
+        Text = Config.SubTitle,
+        TextTransparency = 0.4,
+        FontFace = Font.new(
+            "rbxasset://fonts/families/GothamSSm.json",
+            Enum.FontWeight.Regular,
+            Enum.FontStyle.Normal
+        ),
+        TextSize = 12,
+        TextXAlignment = Enum.TextXAlignment.Center, -- Center horizontal
+        TextYAlignment = Enum.TextYAlignment.Center,
+        Size = UDim2.fromScale(0, 0),
+        AutomaticSize = Enum.AutomaticSize.Y,
+        BackgroundTransparency = 1,
+        LayoutOrder = 2,
+        ThemeTag = { TextColor3 = "Text" },
+    })
+end
 
 
 			}),
@@ -3387,7 +3385,7 @@ Components.TitleBar = (function()
 					BackgroundColor3 = "TitleBarLine",
 				},
 			}),
-		})
+		})											
 		TitleBar.CloseButton = BarButton(Components.Assets.Close, UDim2.new(1, -4, 0, 4), TitleBar.Frame, function()
 			Library.Window:Dialog({
 				Title = "Close",
