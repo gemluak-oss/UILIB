@@ -549,8 +549,8 @@ local Creator = {
 		},
 		Frame = {
 			BackgroundColor3 = Color3.new(1, 1, 1),
-			BorderColor3 = Color3.new(0, 0, 0),
-			BorderSizePixel = 0.5,
+			BorderColor3 = Color3.new(255, 255, 255),
+			BorderSizePixel = 1,
 		},
 		ScrollingFrame = {
 			BackgroundColor3 = Color3.new(1, 1, 1),
