@@ -1375,7 +1375,7 @@ function AcrylicPaint()
 			}),
 
 			New("Frame", {
-				BackgroundTransparency = 0.45,
+				BackgroundTransparency = 0,
 				Size = UDim2.fromScale(1, 1),
 				Name = "Background",
 				ThemeTag = {
@@ -1443,7 +1443,7 @@ function AcrylicPaint()
 				}),
 				New("UIStroke", {
 					Transparency = 0.5,
-					Thickness = 1,
+					Thickness = 2,
 					ThemeTag = {
 						Color = "AcrylicBorder",
 					},
