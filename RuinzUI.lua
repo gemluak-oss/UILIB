@@ -548,7 +548,7 @@ local Creator = {
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		},
 		Frame = {
-			BackgroundColor3 = Color3.new(1, 1, 1),
+			BackgroundColor3 = Color3.new(255, 255, 255),
 			BorderColor3 = Color3.new(255, 255, 255),
 			BorderSizePixel = 1,
 		},
