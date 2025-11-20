@@ -3306,9 +3306,9 @@ Components.TitleBar = (function()
 					RichText = true,
 					Text = Config.Title,
 					FontFace = Font.new(
-						"rbxasset://fonts/families/GothamSSm.json",
-						Enum.FontWeight.SemiBold,
-						Enum.FontStyle.Normal
+					    "rbxasset://fonts/families/GothamSSm.json",
+					    Enum.FontWeight.Bold,
+					    Enum.FontStyle.Normal
 					)
 					TextSize = 15,
 					TextXAlignment = "Left",
