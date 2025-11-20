@@ -56,7 +56,49 @@ local Themes = {
 		"Cloud",
 		"Grape",
 		"Bloody",
-		"Arctic"
+		"Arctic",
+		"Orange"
+	},
+	Orange = {
+		Name = "Orange",
+		Accent = Color3.fromRGB(255, 140, 50),           -- Aksen oranye terang
+		AcrylicMain = Color3.fromRGB(35, 25, 30),        -- Background gelap
+		AcrylicBorder = Color3.fromRGB(180, 80, 35),     -- Border lebih terang
+		AcrylicGradient = ColorSequence.new(
+		    Color3.fromRGB(80, 40, 25),
+		    Color3.fromRGB(100, 50, 30)
+		),
+		AcrylicNoise = 0.92,
+		TitleBarLine = Color3.fromRGB(200, 100, 50),
+		Tab = Color3.fromRGB(220, 120, 60),
+		Element = Color3.fromRGB(210, 100, 50),
+		ElementBorder = Color3.fromRGB(120, 50, 30),
+		InElementBorder = Color3.fromRGB(150, 60, 40),
+		ElementTransparency = 0.87,
+		ToggleSlider = Color3.fromRGB(220, 110, 50),
+		ToggleToggled = Color3.fromRGB(45, 15, 25),
+		SliderRail = Color3.fromRGB(220, 110, 50),
+		DropdownFrame = Color3.fromRGB(230, 125, 60),
+		DropdownHolder = Color3.fromRGB(75, 30, 45),
+		DropdownBorder = Color3.fromRGB(120, 50, 30),
+		DropdownOption = Color3.fromRGB(220, 110, 50),
+		Keybind = Color3.fromRGB(220, 110, 50),
+		Input = Color3.fromRGB(220, 110, 50),
+		InputFocused = Color3.fromRGB(35, 15, 20),
+		InputIndicator = Color3.fromRGB(240, 130, 60),
+		InputIndicatorFocus = Color3.fromRGB(255, 140, 50),
+		Dialog = Color3.fromRGB(75, 30, 45),
+		DialogHolder = Color3.fromRGB(65, 25, 40),
+		DialogHolderLine = Color3.fromRGB(60, 20, 35),
+		DialogButton = Color3.fromRGB(75, 30, 45),
+		DialogButtonBorder = Color3.fromRGB(130, 55, 35),
+		DialogBorder = Color3.fromRGB(115, 50, 30),
+		DialogInput = Color3.fromRGB(95, 45, 30),
+		DialogInputLine = Color3.fromRGB(230, 120, 60),
+		Text = Color3.fromRGB(240, 240, 240),
+		SubText = Color3.fromRGB(180, 180, 180),
+		Hover = Color3.fromRGB(220, 110, 50),
+		HoverChange = 0.04
 	},
 	Dark = {
 		Name = "Dark",
