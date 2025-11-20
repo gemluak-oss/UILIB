@@ -43,8 +43,8 @@ local Themes = {
 	},
 	Dark = {
 		Name = "Dark",
-		 Accent = Color3.fromRGB(255, 255, 255),
-        AcrylicMain = Color3.fromRGB(100, 100, 100),
+		 Accent = Color3.fromRGB(0, 0, 0),
+        AcrylicMain = Color3.fromRGB(20, 20, 20),
         AcrylicBorder = Color3.fromRGB(80, 80, 80),  -- border window utama
         AcrylicGradient = ColorSequence.new(Color3.fromRGB(0, 0, 0), Color3.fromRGB(0, 0, 0)),
         AcrylicNoise = 1,
