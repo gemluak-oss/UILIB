@@ -551,9 +551,9 @@ local Creator = {
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		},
 		Frame = {
-			BackgroundColor3 = Color3.new(1, 1, 1),
-			BorderColor3 = Color3.new(0, 0, 0),
-			BorderSizePixel = 0,
+			BackgroundColor3 = Color3.new(0, 0, 0),
+			BorderColor3 = Color3.new(255, 255, 255),
+			BorderSizePixel = 1,
 		},
 		ScrollingFrame = {
 			BackgroundColor3 = Color3.new(1, 1, 1),
@@ -570,8 +570,8 @@ local Creator = {
 			TextSize = 14,
 		},
 		TextButton = {
-			BackgroundColor3 = Color3.new(1, 1, 1),
-			BorderColor3 = Color3.new(0, 0, 0),
+			BackgroundColor3 = Color3.new(0, 0, 0),
+			BorderColor3 = Color3.new(255, 255, 255,
 			AutoButtonColor = false,
 			Font = Enum.Font.SourceSans,
 			Text = "",
