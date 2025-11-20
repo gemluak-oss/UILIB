@@ -3306,11 +3306,11 @@ Components.TitleBar = (function()
 					Text = Config.Title,
 					FontFace = Font.new(
 						"rbxasset://fonts/families/GothamSSm.json",
-						Enum.FontWeight.Regular,
+						Enum.FontWeight.Bold,
 						Enum.FontStyle.Normal
 					),
-					TextSize = 20,
-					TextXAlignment = "Center",
+					TextSize = 18,
+					TextXAlignment = "Left",
 					TextYAlignment = "Center",
 					Size = UDim2.fromScale(0, 1),
 					AutomaticSize = Enum.AutomaticSize.X,
