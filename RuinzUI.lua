@@ -43,7 +43,7 @@ local Themes = {
 	},
 	Dark = {
 		Name = "Dark",
-		Accent = Color3.fromRGB(255, 160, 100),
+	        Accent = Color3.fromRGB(255, 160, 100),
         AcrylicMain = Color3.fromRGB(38, 38, 38),
         AcrylicBorder = Color3.fromRGB(120, 90, 70),
         AcrylicGradient = ColorSequence.new(Color3.fromRGB(38, 38, 38), Color3.fromRGB(48, 42, 38)),
@@ -74,8 +74,8 @@ local Themes = {
         DialogBorder = Color3.fromRGB(170, 120, 85),
         DialogInput = Color3.fromRGB(55, 50, 45),
         DialogInputLine = Color3.fromRGB(170, 120, 85),
-        Text = Color3.fromRGB(245, 230, 210), -- lebih terang tapi tetap hangat
-        SubText = Color3.fromRGB(220, 200, 180),
+        Text = Color3.fromRGB(255, 255, 255),  -- putih murni
+        SubText = Color3.fromRGB(255, 255, 255), -- putih murni
         Hover = Color3.fromRGB(75, 65, 55),
         HoverChange = 0.03
 	},
