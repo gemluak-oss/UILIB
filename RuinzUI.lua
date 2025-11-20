@@ -60,7 +60,6 @@ local Themes = {
         ToggleToggled = Color3.fromRGB(0, 0, 0),
         ToggleBorder = Color3.fromRGB(255, 255, 255), -- border toggle
         SliderRail = Color3.fromRGB(0, 0, 0),
-        SliderBorder = Color3.fromRGB(255, 255, 255), -- border slider
         DropdownFrame = Color3.fromRGB(0, 0, 0),
         DropdownHolder = Color3.fromRGB(0, 0, 0),
         DropdownBorder = Color3.fromRGB(255, 255, 255), -- border dropdown
